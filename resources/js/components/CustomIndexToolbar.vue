@@ -8,7 +8,7 @@
             class="btn btn-default btn-primary"
             :title="__('Run Import Action')"
         >
-            <span>{{ __('Import' + ' ' + resourceInformation.label) }}</span>
+            <span>{{ importAction.buttonLabel ? importAction.buttonLabel : __('Import' + ' ' + resourceInformation.label) }}</span>
         </button>
 
         <!-- Action Confirmation Modal -->
@@ -218,11 +218,15 @@ export default {
         hasImportAction() {
             // before
             for (let i=0; i<this.actions.length; i++) {
-                if(this.actions[i].uriKey == 'import-' + this.resourceName) {
+                if(this.actions[i].isImportAction) {
                     return true
                 }
             }
             return false
+        },
+
+        importAction() {
+            return this.actions.find(a => a.isImportAction);
         },
 
         selectedAction() {

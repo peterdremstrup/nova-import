@@ -70,6 +70,13 @@ class Action implements JsonSerializable
     public $onlyOnDetail = false;
 
     /**
+    * Indicates that this action is a import action
+    *
+    * @var bool
+    */
+    public $isImportAction = true;
+
+    /**
      * The current batch ID being handled by the action.
      *
      * @var string|null
@@ -365,6 +372,16 @@ class Action implements JsonSerializable
     }
 
     /**
+     * Get the displayable name of the action.
+     *
+     * @return string
+     */
+    public function buttonLabel()
+    {
+        return $this->buttonLabel ?: Nova::humanize($this);
+    }
+
+    /**
      * Get the URI key for the action.
      *
      * @return string
@@ -432,6 +449,8 @@ class Action implements JsonSerializable
             'confirmButtonText' => __($this->confirmButtonText),
             'confirmText' => __($this->confirmText),
             'class' => $this->actionClass(),
+            'isImportAction' => $this->isImportAction,
+            'buttonLabel' => $this->buttonLabel(),
         ], $this->meta());
     }
 }
