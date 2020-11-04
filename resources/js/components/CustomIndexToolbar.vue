@@ -118,7 +118,7 @@ export default {
          * Confirm with the user that they actually want to run the selected action.
          */
         openConfirmationModal() {
-            this.selectedActionKey = 'import-' + this.resourceName
+            this.selectedActionKey = this.importAction.uriKey
             this.confirmActionModalOpened = true
         },
 
